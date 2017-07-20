@@ -9,6 +9,8 @@
 #import "ViewController.h"
 
 @interface ViewController ()
+@property (weak, nonatomic) IBOutlet UITextView *body;
+@property (weak, nonatomic) IBOutlet UILabel *headline;
 
 @end
 
@@ -23,6 +25,25 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)outlineBodySelection
+{
+    [self.body.textStorage addAttributes: @{NSStrokeWidthAttributeName : @-3,
+                                            NSStrokeWidthAttributeName: [UIColor blackColor] }
+                                   range:self.body.selectedRange];
+}
+- (IBAction)unoutlineBodySelection
+{
+    [self.body.textStorage removeAttribute:NSStrokeWidthAttributeName
+                                     range:self.body.selectedRange];
+}
+
+- (IBAction)changeBodySelectionColorToMatchBackgroundOfButton:(UIButton *)sender {
+    
+    [self.body.textStorage addAttribute:NSForegroundColorAttributeName
+                                  value:sender.backgroundColor
+                                  range:self.body.selectedRange];
 }
 
 
